@@ -25,7 +25,7 @@ const FormCard = () => {
     // Normal login
     else if (res.data?.auth_response?.AuthenticationResult?.AccessToken) {
       //   TODO: Fetch menu redirect route
-      router.push("/config/product");
+      router.push("/ecomBot/product");
       sessionStorage.setItem(
         "AccessToken",
         res.data?.auth_response?.AuthenticationResult?.AccessToken,
@@ -39,7 +39,7 @@ const FormCard = () => {
     const AccessToken =
       d?.data?.auth_response?.AuthenticationResult?.AccessToken;
     if (AccessToken) {
-      router.push("/config/product");
+      router.push("/ecomBot/product");
       sessionStorage.setItem("AccessToken", AccessToken);
       sessionStorage.removeItem("username");
     }
@@ -61,7 +61,7 @@ const FormCard = () => {
         body.password === hardcodedPassword
       ) {
         sessionStorage.setItem("AccessToken", "dummy-token"); // Simulate an access token
-        router.push("/config/product"); // Navigate to the dashboard
+        router.push("/ecomBot/product"); // Navigate to the dashboard
       } else {
         toast({ title: "Invalid credentials", variant: "destructive" });
       }
