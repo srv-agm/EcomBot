@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Sheet } from "@/components/ui/sheet";
 import { ThemeProvider } from "@/components/mf/theme-context"; // Import the ThemeProvider
 import { ReactQueryProvider } from "@/context";
+import { Toaster as HotToaster } from 'react-hot-toast';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -40,7 +41,7 @@ export default function RootLayout({
         <ReactQueryProvider>
           <ThemeProvider>
             {/* Wrap the app in the ThemeProvider */}
-            <Toaster />
+            <HotToaster position="top-right" />
             <Sheet>
               {/* <div className="bg-background text-foreground dark:bg-gray-900 dark:text-white"> */}
               {children}
