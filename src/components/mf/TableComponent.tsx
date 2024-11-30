@@ -51,6 +51,7 @@ interface ResizableTableProps<T> {
   isView?: boolean;
   isDownload?: boolean;
   isPaginated?: boolean;
+  showPagination?: boolean;
   isSearchable?: boolean;
   isSelectable?: boolean;
   isCount?: boolean;
