@@ -62,6 +62,12 @@ const menu: MenuItem[] = [
         subMenu: [],
         route: "/ecomBot/sos",
       },
+      {
+        title: "Offline Vs Online Comparison",
+        icon: "",
+        subMenu: [],
+        route: "/ecomBot/offlineVsonline",
+      },
       // {
       //   title: "Campaign Optimisation",
       //   icon: "",
