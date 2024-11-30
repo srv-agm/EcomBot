@@ -47,7 +47,7 @@ const menu: MenuItem[] = [
   //   ],
   // },
   {
-    title: "Social Media Listening",
+    title: "Ecom Bot",
     icon: <Globe size={18} />,
     subMenu: [
       {
