@@ -212,6 +212,8 @@ export default function DashboardPage() {
           />
         </div>
       )}
+      <hr />
+      <hr />
       {responseData && !loading && (
         <div className="mt-4 rounded border bg-gray-100 p-4">
           <ResizableTable
