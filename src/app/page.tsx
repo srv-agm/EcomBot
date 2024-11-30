@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <>
       <Home
-        InfoText="Social Media Listing"
+        InfoText="Real-Time Competitor Price and Discount Monitoring: Track competitor pricing, identify discounts, and receive actionable insights with predictive analytics to optimize your pricing strategies and stay competitive."
         logoSize="w-52"
         logoUrl="https://infringementportalcontent.mfilterit.com/images/media/logos/mfilterit-white-logo.png"
       >

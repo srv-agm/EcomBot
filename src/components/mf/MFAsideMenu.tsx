@@ -51,10 +51,10 @@ const menu: MenuItem[] = [
     icon: <Globe size={18} />,
     subMenu: [
       {
-        title: "Keyword",
+        title: "ECOM",
         icon: "",
         subMenu: [],
-        route: "/config/keyword",
+        route: "/ecomBot/product",
       },
       // {
       //   title: "Campaign Optimisation",
