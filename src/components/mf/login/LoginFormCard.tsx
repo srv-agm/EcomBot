@@ -42,7 +42,7 @@ const LoginFormCardContainer = () => {
     const AccessToken =
       d?.data?.auth_response?.AuthenticationResult?.AccessToken;
     if (AccessToken) {
-      router.push("/ecomBot/product");
+      router.push("/config/product");
       sessionStorage.setItem("AccessToken", AccessToken);
       sessionStorage.removeItem("username");
     }
