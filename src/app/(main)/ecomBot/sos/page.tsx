@@ -202,18 +202,19 @@ export default function DashboardPage() {
 
       {responseData && !loading && (
         <div className="mt-4 rounded border bg-gray-100 p-4">
-          <ResizableTable
-            columns={columnsBrand}
-            data={responseData?.brands ?? []}
-            isLoading={false}
-            headerColor="#DCDCDC"
-            isSearchable
-            isSelectable
-          />
+          <div className="h-[500px]">
+            <ResizableTable
+              columns={columnsBrand}
+              data={responseData?.brands ?? []}
+              isLoading={false}
+              headerColor="#DCDCDC"
+              isSearchable
+              isSelectable
+            />
+          </div>
         </div>
       )}
-      <hr />
-      <hr />
+      <div className="h-[10px]"></div>
       {responseData && !loading && (
         <div className="mt-4 rounded border bg-gray-100 p-4">
           <ResizableTable
