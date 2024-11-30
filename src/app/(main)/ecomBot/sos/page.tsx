@@ -43,10 +43,16 @@ const columns: any[] = [
 ];
 
 const columnsBrand: any[] = [
-  { title: "Rank", key: "search_rank" }
+  { title: "Brand", key: "brand" },
+  { title: "Organic", key: "organic" },
+  { title: "Organic Avg Rank", key: "organic_avg_rank" },
+  { title: "Organic Share", key: "organic_share" },
+  { title: "Sponsored", key: "sponsored" },
+  { title: "Sponsored Avg Rank", key: "sponsored_avg_rank" },
+  { title: "Sponsored Share", key: "sponsored_share" },
+  { title: "Total Avg Rank", key: "total_avg_rank" },
   // { title: "Rank", key: "search_rank" }
   // { title: "Rank", key: "search_rank" }
-
 ];
 
 export default function DashboardPage() {
@@ -197,7 +203,7 @@ export default function DashboardPage() {
       {responseData && !loading && (
         <div className="mt-4 rounded border bg-gray-100 p-4">
           <ResizableTable
-            columns={columns}
+            columns={columnsBrand}
             data={responseData?.brands ?? []}
             isLoading={false}
             headerColor="#DCDCDC"
