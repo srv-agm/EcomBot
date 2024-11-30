@@ -56,6 +56,12 @@ const menu: MenuItem[] = [
         subMenu: [],
         route: "/ecomBot/product",
       },
+      {
+        title: "Real Time SOS",
+        icon: "",
+        subMenu: [],
+        route: "/ecomBot/sos",
+      },
       // {
       //   title: "Campaign Optimisation",
       //   icon: "",
