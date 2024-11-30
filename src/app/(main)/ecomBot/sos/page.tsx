@@ -5,6 +5,7 @@ import ResizableTable from "@/components/mf/TableComponent";
 
 interface ResponseData {
   data: any[];
+  brands: any[];
 }
 
 const columns: any[] = [
@@ -39,6 +40,13 @@ const columns: any[] = [
   { title: "Platform", key: "platform" },
   { title: "ASP", key: "asp" },
   { title: "MRP", key: "mrp" },
+];
+
+const columnsBrand: any[] = [
+  { title: "Rank", key: "search_rank" }
+  // { title: "Rank", key: "search_rank" }
+  // { title: "Rank", key: "search_rank" }
+
 ];
 
 export default function DashboardPage() {
@@ -186,6 +194,18 @@ export default function DashboardPage() {
         </button>
       </div>
 
+      {responseData && !loading && (
+        <div className="mt-4 rounded border bg-gray-100 p-4">
+          <ResizableTable
+            columns={columns}
+            data={responseData?.brands ?? []}
+            isLoading={false}
+            headerColor="#DCDCDC"
+            isSearchable
+            isSelectable
+          />
+        </div>
+      )}
       {responseData && !loading && (
         <div className="mt-4 rounded border bg-gray-100 p-4">
           <ResizableTable
