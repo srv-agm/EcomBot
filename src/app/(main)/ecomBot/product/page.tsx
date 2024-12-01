@@ -21,7 +21,6 @@ export default function DashboardPage() {
   const [avgProductsData, setAvgProductsData] = useState<any>(null);
 
   useEffect(() => {
-    // Fetch data from your API
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -49,7 +48,6 @@ export default function DashboardPage() {
 
     setLoading(true);
     try {
-      // Call both APIs simultaneously
       const [forecastResponse, avgProductsResponse] = await Promise.all([
         fetch("https://ecomm-realtime-api.mfilterit.net/forecast", {
           method: "POST",
@@ -112,30 +110,28 @@ export default function DashboardPage() {
         >
           {loading ? "Loading..." : "Submit"}
         </button>
-        <hr />
-        <hr />
+
         {forecastImage && (
-          <div className="h-[300px]">
-            <ResizableTable
-              columns={columnsBrand}
-              data={avgProductsData?.data ?? []}
-              isLoading={false}
-              headerColor="#DCDCDC"
-              isSearchable
-              isSelectable
-              isPaginated={false}
-            />
-          </div>
-        )}
-        <hr />
-        <hr />
-        {forecastImage && (
-          <div className="mt-8 max-w-full">
-            <img
-              src={forecastImage}
-              alt="Forecast visualization"
-              className="rounded-lg shadow-lg"
-            />
+          <div className="mt-8 w-full space-y-6">
+            <div className="p-4 bg-gray-100 rounded-lg shadow">
+              <ResizableTable
+                columns={columnsBrand}
+                data={avgProductsData?.data ?? []}
+                isLoading={false}
+                headerColor="#DCDCDC"
+                isSearchable
+                isSelectable
+                isPaginated={false}
+              />
+            </div>
+
+            <div className="p-4">
+              <img
+                src={forecastImage}
+                alt="Forecast visualization"
+                className="w-full rounded-lg shadow-lg"
+              />
+            </div>
           </div>
         )}
       </div>
