@@ -12,7 +12,7 @@ export default function DashboardPage() {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "https://ecomm-realtime-api.mfilterit.net/distinct_title"
+          "https://ecomm-realtime-api.mfilterit.net/distinct_title",
         );
         const data = await response.json();
         setProducts(data.titles || []); // Populate dropdown
@@ -39,7 +39,7 @@ export default function DashboardPage() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ title: selectedProduct }),
-        }
+        },
       );
       const { data } = await response.json();
       setComparisonData(data);
@@ -105,6 +105,9 @@ export default function DashboardPage() {
                 <h2 className="text-xl font-bold text-black">{item.title}</h2>
                 <p className="text-black">
                   <strong>Brand:</strong> {item.brand || "N/A"}
+                </p>
+                <p className="text-black">
+                  <strong>Platform:</strong> {item.platform || "N/A"}
                 </p>
                 <p className="text-black">
                   <strong>Price:</strong> ₹{item.asp}
