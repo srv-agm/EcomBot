@@ -1,9 +1,25 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ResizableTable from "@/components/mf/TableComponent";
 
 export default function DashboardPage() {
-  const [options, setOptions] = useState<Array<{ key: string; value: string }>>([]);
+  const columnsBrand: any[] = [
+    { title: "Brand", key: "brand" },
+    { title: "Organic Rank", key: "organic" },
+    { title: "Organic Avg Rank", key: "organic_avg_rank" },
+    { title: "Organic Share", key: "organic_share" },
+    { title: "Sponsored Rank", key: "sponsored" },
+    { title: "Sponsored Avg Rank", key: "sponsored_avg_rank" },
+    { title: "Sponsored Share", key: "sponsored_share" },
+    { title: "Total Avg Rank", key: "total_avg_rank" },
+    // { title: "Rank", key: "search_rank" }
+    // { title: "Rank", key: "search_rank" }
+  ];
+
+  const [options, setOptions] = useState<Array<{ key: string; value: string }>>(
+    [],
+  );
   const [selectedValue, setSelectedValue] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [forecastImage, setForecastImage] = useState<string>("");
@@ -37,15 +53,18 @@ export default function DashboardPage() {
 
     setLoading(true);
     try {
-      const response = await fetch("https://ecomm-realtime-api.mfilterit.net/forecast", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "https://ecomm-realtime-api.mfilterit.net/forecast",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            product_code: selectedValue,
+          }),
         },
-        body: JSON.stringify({
-          product_code: selectedValue,
-        }),
-      });
+      );
       const data = await response.json();
       setForecastImage(data.s3_links);
     } catch (error) {
@@ -78,16 +97,30 @@ export default function DashboardPage() {
         <button
           onClick={handleSubmit}
           disabled={!selectedValue || loading}
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-gray-400"
+          className="mt-4 rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:bg-gray-400"
         >
           {loading ? "Loading..." : "Submit"}
         </button>
-
+        <hr />
+        <hr />
+        <div className="h-[300px]">
+          {/* <ResizableTable
+            columns={columnsBrand}
+            data={responseData?.brands ?? []}
+            isLoading={false}
+            headerColor="#DCDCDC"
+            isSearchable
+            isSelectable
+            isPaginated={false}
+          /> */}
+        </div>
+        <hr />
+        <hr />
         {forecastImage && (
           <div className="mt-8 max-w-full">
-            <img 
-              src={forecastImage} 
-              alt="Forecast visualization" 
+            <img
+              src={forecastImage}
+              alt="Forecast visualization"
               className="rounded-lg shadow-lg"
             />
           </div>
