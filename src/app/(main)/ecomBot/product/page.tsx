@@ -5,16 +5,11 @@ import ResizableTable from "@/components/mf/TableComponent";
 
 export default function DashboardPage() {
   const columnsBrand: any[] = [
+    { title: "Avg ASP", key: "avg_asp" },
+    { title: "Avg Discount", key: "avg_discount" },
+    { title: "Avg MRP", key: "avg_mrp" },
     { title: "Brand", key: "brand" },
-    { title: "Organic Rank", key: "organic" },
-    { title: "Organic Avg Rank", key: "organic_avg_rank" },
-    { title: "Organic Share", key: "organic_share" },
-    { title: "Sponsored Rank", key: "sponsored" },
-    { title: "Sponsored Avg Rank", key: "sponsored_avg_rank" },
-    { title: "Sponsored Share", key: "sponsored_share" },
-    { title: "Total Avg Rank", key: "total_avg_rank" },
-    // { title: "Rank", key: "search_rank" }
-    // { title: "Rank", key: "search_rank" }
+    { title: "Brand Type", key: "brand_type" },
   ];
 
   const [options, setOptions] = useState<Array<{ key: string; value: string }>>(
@@ -23,6 +18,7 @@ export default function DashboardPage() {
   const [selectedValue, setSelectedValue] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [forecastImage, setForecastImage] = useState<string>("");
+  const [avgProductsData, setAvgProductsData] = useState<any>(null);
 
   useEffect(() => {
     // Fetch data from your API
@@ -53,9 +49,9 @@ export default function DashboardPage() {
 
     setLoading(true);
     try {
-      const response = await fetch(
-        "https://ecomm-realtime-api.mfilterit.net/forecast",
-        {
+      // Call both APIs simultaneously
+      const [forecastResponse, avgProductsResponse] = await Promise.all([
+        fetch("https://ecomm-realtime-api.mfilterit.net/forecast", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -63,10 +59,25 @@ export default function DashboardPage() {
           body: JSON.stringify({
             product_code: selectedValue,
           }),
-        },
-      );
-      const data = await response.json();
-      setForecastImage(data.s3_links);
+        }),
+        fetch("https://ecomm-realtime-api.mfilterit.net/get_avg_products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            product_code: selectedValue,
+          }),
+        }),
+      ]);
+
+      const [forecastData, avgData] = await Promise.all([
+        forecastResponse.json(),
+        avgProductsResponse.json(),
+      ]);
+
+      setForecastImage(forecastData.s3_links);
+      setAvgProductsData(avgData);
     } catch (error) {
       console.error("Error submitting data:", error);
     } finally {
@@ -103,17 +114,19 @@ export default function DashboardPage() {
         </button>
         <hr />
         <hr />
-        <div className="h-[300px]">
-          {/* <ResizableTable
-            columns={columnsBrand}
-            data={responseData?.brands ?? []}
-            isLoading={false}
-            headerColor="#DCDCDC"
-            isSearchable
-            isSelectable
-            isPaginated={false}
-          /> */}
-        </div>
+        {forecastImage && (
+          <div className="h-[300px]">
+            <ResizableTable
+              columns={columnsBrand}
+              data={avgProductsData?.data ?? []}
+              isLoading={false}
+              headerColor="#DCDCDC"
+              isSearchable
+              isSelectable
+              isPaginated={false}
+            />
+          </div>
+        )}
         <hr />
         <hr />
         {forecastImage && (
