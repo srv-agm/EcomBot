@@ -202,7 +202,9 @@ export default function DashboardPage() {
 
       {responseData && !loading && (
         <div className="mt-4 rounded border bg-gray-100 p-4">
-          <h2 className="mb-4 text-xl font-semibold text-center">Top 3 Brands</h2>
+          <h2 className="mb-4 text-center text-xl font-semibold">
+            Top 3 Brands
+          </h2>
           <div className="h-[300px]">
             <ResizableTable
               columns={columnsBrand}
@@ -211,7 +213,7 @@ export default function DashboardPage() {
               headerColor="#DCDCDC"
               isSearchable
               isSelectable
-              showPagination={false}
+              isPaginated={false}
             />
           </div>
         </div>

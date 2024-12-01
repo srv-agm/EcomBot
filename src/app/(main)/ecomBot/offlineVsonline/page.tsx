@@ -12,7 +12,7 @@ export default function DashboardPage() {
     const fetchProducts = async () => {
       try {
         const response = await fetch(
-          "https://ecomm-realtime-api.mfilterit.net/distinct_title",
+          "https://ecomm-realtime-api.mfilterit.net/distinct_title"
         );
         const data = await response.json();
         setProducts(data.titles || []); // Populate dropdown
@@ -39,7 +39,7 @@ export default function DashboardPage() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ title: selectedProduct }),
-        },
+        }
       );
       const { data } = await response.json();
       setComparisonData(data);
@@ -51,31 +51,33 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 text-center">
       <h1 className="mb-4 text-2xl font-bold">Product Comparison</h1>
 
-      {/* Product Dropdown */}
-      <div className="mb-6 flex gap-4">
-        <select
-          className="w-64 rounded-md border p-2"
-          value={selectedProduct}
-          onChange={(e) => setSelectedProduct(e.target.value)}
-          disabled={isLoading}
-        >
-          <option value="">Select Product</option>
-          {products.map((product) => (
-            <option key={product} value={product}>
-              {product}
-            </option>
-          ))}
-        </select>
-        <button
-          className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:opacity-50"
-          onClick={handleCompare}
-          disabled={isLoading}
-        >
-          {isLoading ? "Loading..." : "Compare"}
-        </button>
+      {/* Center Align Dropdown and Button */}
+      <div className="flex flex-col items-center">
+        <div className="mb-6 flex gap-4">
+          <select
+            className="w-64 rounded-md border p-2"
+            value={selectedProduct}
+            onChange={(e) => setSelectedProduct(e.target.value)}
+            disabled={isLoading}
+          >
+            <option value="">Select Product</option>
+            {products.map((product) => (
+              <option key={product} value={product}>
+                {product}
+              </option>
+            ))}
+          </select>
+          <button
+            className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:opacity-50"
+            onClick={handleCompare}
+            disabled={isLoading}
+          >
+            {isLoading ? "Loading..." : "Compare"}
+          </button>
+        </div>
       </div>
 
       {/* Loading State */}
